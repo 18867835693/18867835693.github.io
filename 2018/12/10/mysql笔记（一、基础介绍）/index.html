@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32_32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16_16.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Mysql学习目标一、为什么要学习数据库 二、数据库的相关概念  DBMS、DB、SQL 三、数据库存储数据的特点 四、初始MySQL MySQL产品的介绍MySQL产品的安装          ★MySQL服务的启动和停止     ★MySQL服务的登录和退出     ★MySQL的常见命令和语法规范">
+<meta name="keywords" content="mysql基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql笔记（一、基础介绍）">
+<meta property="og:url" content="https://18867835693.github.io/2018/12/10/mysql笔记（一、基础介绍）/index.html">
+<meta property="og:site_name" content="逆飞的时光">
+<meta property="og:description" content="Mysql学习目标一、为什么要学习数据库 二、数据库的相关概念  DBMS、DB、SQL 三、数据库存储数据的特点 四、初始MySQL MySQL产品的介绍MySQL产品的安装          ★MySQL服务的启动和停止     ★MySQL服务的登录和退出     ★MySQL的常见命令和语法规范">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-11T04:50:08.367Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql笔记（一、基础介绍）">
+<meta name="twitter:description" content="Mysql学习目标一、为什么要学习数据库 二、数据库的相关概念  DBMS、DB、SQL 三、数据库存储数据的特点 四、初始MySQL MySQL产品的介绍MySQL产品的安装          ★MySQL服务的启动和停止     ★MySQL服务的登录和退出     ★MySQL的常见命令和语法规范">
+
+
+
+
+
+
+  <link rel="canonical" href="https://18867835693.github.io/2018/12/10/mysql笔记（一、基础介绍）/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mysql笔记（一、基础介绍） | 逆飞的时光</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">逆飞的时光</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2018/12/10/mysql笔记（一、基础介绍）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Facewaller">
+      <meta itemprop="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逆飞的时光">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql笔记（一、基础介绍）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time itemprop="dateCreated datePublished" datetime="2018-12-10T21:22:36+08:00">2018-12-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time itemprop="dateModified" datetime="2018-12-11T12:50:08+08:00">2018-12-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Mysql学习目标"><a href="#Mysql学习目标" class="headerlink" title="Mysql学习目标"></a>Mysql学习目标</h2><p>一、为什么要学习数据库</p>
+<p>二、数据库的相关概念 </p>
+<p>DBMS、DB、SQL</p>
+<p>三、数据库存储数据的特点</p>
+<p>四、初始MySQL</p>
+<p>MySQL产品的介绍<br>MySQL产品的安装          ★<br>MySQL服务的启动和停止     ★<br>MySQL服务的登录和退出     ★<br>MySQL的常见命令和语法规范</p>
+<a id="more"></a>
+<p>五、DQL语言的学习   ★</p>
+<p>基础查询        ★<br>条件查询         ★<br>排序查询         ★<br>常见函数        ★<br>分组函数        ★<br>分组查询           ★<br>连接查询         ★<br>子查询       √<br>分页查询       ★<br>union联合查询    √</p>
+<p>六、DML语言的学习    ★</p>
+<p>插入语句</p>
+<p>修改语句</p>
+<p>删除语句</p>
+<p>七、DDL语言的学习</p>
+<p>库和表的管理     √    </p>
+<p>常见数据类型介绍  √   </p>
+<p>常见约束        √        </p>
+<p>八、TCL语言的学习</p>
+<p>事务和事务处理    </p>
+<p>九、视图的讲解           √</p>
+<p>十、变量         </p>
+<p>十一、存储过程和函数   </p>
+<p>十二、流程控制结构       </p>
+<h2 id="数据库的好处"><a href="#数据库的好处" class="headerlink" title="数据库的好处"></a>数据库的好处</h2><p>1.持久化数据到本地</p>
+<p>2.可以实现结构化查询，方便管理</p>
+<h2 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h2><p>1、DB：数据库，保存一组有组织的数据的容器</p>
+<p>2、DBMS：数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据</p>
+<p>3、SQL:结构化查询语言，用于和DBMS通信的语言</p>
+<h2 id="数据库存储数据的特点"><a href="#数据库存储数据的特点" class="headerlink" title="数据库存储数据的特点"></a>数据库存储数据的特点</h2><p>1、将数据放到表中，表再放到库中</p>
+<p>2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。</p>
+<p>3、表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。</p>
+<p>4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”</p>
+<p>5、表中的数据是按行存储的，每一行类似于java中的“对象”。</p>
+<h2 id="MySQL产品的介绍和安装"><a href="#MySQL产品的介绍和安装" class="headerlink" title="MySQL产品的介绍和安装"></a>MySQL产品的介绍和安装</h2><p>具体内容请移步 <a href="https://www.mysql.com/downloads/" target="_blank" rel="noopener">Oracle官网</a></p>
+<h2 id="MySQL服务的启动和停止"><a href="#MySQL服务的启动和停止" class="headerlink" title="MySQL服务的启动和停止"></a>MySQL服务的启动和停止</h2><p>方式一：计算机——右击管理——服务</p>
+<p>方式二：通过管理员身份运行</p>
+<p>net start 服务名（启动服务）</p>
+<p>net stop 服务名（停止服务）</p>
+<h2 id="MySQL服务的登录和退出"><a href="#MySQL服务的登录和退出" class="headerlink" title="MySQL服务的登录和退出"></a>MySQL服务的登录和退出</h2><p>方式一：通过mysql自带的客户端</p>
+<p>只限于root用户</p>
+<p>方式二：通过windows自带的客户端</p>
+<p>登录：</p>
+<p><code>mysql 【-h主机名 -P端口号 】-u用户名 -p密码</code></p>
+<p>退出：</p>
+<p><code>exit</code> 或 <code>ctrl+C</code></p>
+<h2 id="MySQL的常见命令"><a href="#MySQL的常见命令" class="headerlink" title="MySQL的常见命令"></a>MySQL的常见命令</h2><p>1.查看当前所有的数据库</p>
+<p><code>show databases;</code></p>
+<p>2.打开指定的库</p>
+<p><code>use 库名</code></p>
+<p>3.查看当前库的所有表</p>
+<p><code>show tables;</code></p>
+<p>4.查看其它库的所有表</p>
+<p><code>show tables from 库名;</code></p>
+<p>5.创建表</p>
+<p><code>create table 表名(列名 列类型,列名 列类型，...);</code></p>
+<p>6.查看表结构</p>
+<p><code>desc 表名;</code></p>
+<p>7.查看服务器的版本</p>
+<p>方式一：登录到mysql服务端</p>
+<p><code>select version();</code></p>
+<p>方式二：没有登录到mysql服务端</p>
+<p><code>mysql --version</code></p>
+<p>或</p>
+<p><code>mysql --V</code></p>
+<h2 id="MySQL的语法规范"><a href="#MySQL的语法规范" class="headerlink" title="MySQL的语法规范"></a>MySQL的语法规范</h2><p>1.不区分大小写,但建议关键字大写，表名、列名小写</p>
+<p>2.每条命令最好用分号结尾</p>
+<p>3.每条命令根据需要，可以进行缩进 或换行</p>
+<p>4.注释</p>
+<p>单行注释：#注释文字</p>
+<p>单行注释：– 注释文字</p>
+<p>多行注释：/<em> 注释文字  </em>/</p>
+<h2 id="SQL的语言分类"><a href="#SQL的语言分类" class="headerlink" title="SQL的语言分类"></a>SQL的语言分类</h2><p>DQL（Data Query Language）：数据查询语言</p>
+<p><code>select</code> </p>
+<p>DML(Data Manipulate Language):数据操作语言</p>
+<p><code>insert 、update、delete</code></p>
+<p>DDL（Data Define Languge）：数据定义语言</p>
+<p><code>create、drop、alter</code></p>
+<p>TCL（Transaction Control Language）：事务控制语言</p>
+<p><code>commit、rollback</code></p>
+<h2 id="SQL的常见命令"><a href="#SQL的常见命令" class="headerlink" title="SQL的常见命令"></a>SQL的常见命令</h2><p><code>show databases；</code> 查看所有的数据库</p>
+<p><code>use 库名；</code> 打开指定的库</p>
+<p><code>show tables ;</code> 显示库中的所有表</p>
+<p><code>show tables from 库名;</code> 显示指定库中的所有表</p>
+<p><code>create table 表名(字段名 字段类型,    字段名 字段类型);</code> 创建表</p>
+<p><code>desc 表名;</code> 查看指定表的结构</p>
+<p><code>select * from 表名;</code> 显示表中的所有数据</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql基础/" rel="tag"># mysql基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/08/Markdown基础语法/" rel="next" title="Markdownn基础语法">
+                <i class="fa fa-chevron-left"></i> Markdownn基础语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/11/mysql笔记（二、SQL语言进阶）/" rel="prev" title="mysql笔记（二、SQL语言进阶）">
+                mysql笔记（二、SQL语言进阶） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Facewaller">
+            
+              <p class="site-author-name" itemprop="name">Facewaller</p>
+              <p class="site-description motion-element" itemprop="description">“暮色苍茫看劲松，乱云飞渡仍从容”</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/5710147235/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="Weibo &rarr; https://weibo.com/5710147235/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql学习目标"><span class="nav-text">Mysql学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的好处"><span class="nav-text">数据库的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库相关概念"><span class="nav-text">数据库相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库存储数据的特点"><span class="nav-text">数据库存储数据的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL产品的介绍和安装"><span class="nav-text">MySQL产品的介绍和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL服务的启动和停止"><span class="nav-text">MySQL服务的启动和停止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL服务的登录和退出"><span class="nav-text">MySQL服务的登录和退出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL的常见命令"><span class="nav-text">MySQL的常见命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL的语法规范"><span class="nav-text">MySQL的语法规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL的语言分类"><span class="nav-text">SQL的语言分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL的常见命令"><span class="nav-text">SQL的常见命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Facewaller</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
