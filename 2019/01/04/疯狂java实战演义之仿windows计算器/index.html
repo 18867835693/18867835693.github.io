@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32_32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16_16.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="引言Windows计算器，是Windows操作系统自带计算器，可以帮助用户完成数据的运算，它可分为“标准型”和“科学型”，本仿Windows计算器是标准型的Java实现，标准型Windows计算器实现的主要功能有：四则运算；求倒数；求开方；存储计算结果；读取计算结果；累积计算结果。本项目将使用到JFrame和JPanel两个Swing容器，使用到JTextField和JButton两个Swing容">
+<meta name="keywords" content="java,swing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="疯狂java实战演义之仿windows计算器">
+<meta property="og:url" content="https://18867835693.github.io/2019/01/04/疯狂java实战演义之仿windows计算器/index.html">
+<meta property="og:site_name" content="逆飞的时光">
+<meta property="og:description" content="引言Windows计算器，是Windows操作系统自带计算器，可以帮助用户完成数据的运算，它可分为“标准型”和“科学型”，本仿Windows计算器是标准型的Java实现，标准型Windows计算器实现的主要功能有：四则运算；求倒数；求开方；存储计算结果；读取计算结果；累积计算结果。本项目将使用到JFrame和JPanel两个Swing容器，使用到JTextField和JButton两个Swing容">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://18867835693.github.io/2019/01/04/疯狂java实战演义之仿windows计算器/cal.PNG">
+<meta property="og:image" content="https://18867835693.github.io/2019/01/04/疯狂java实战演义之仿windows计算器/class.PNG">
+<meta property="og:updated_time" content="2019-01-04T08:50:03.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="疯狂java实战演义之仿windows计算器">
+<meta name="twitter:description" content="引言Windows计算器，是Windows操作系统自带计算器，可以帮助用户完成数据的运算，它可分为“标准型”和“科学型”，本仿Windows计算器是标准型的Java实现，标准型Windows计算器实现的主要功能有：四则运算；求倒数；求开方；存储计算结果；读取计算结果；累积计算结果。本项目将使用到JFrame和JPanel两个Swing容器，使用到JTextField和JButton两个Swing容">
+<meta name="twitter:image" content="https://18867835693.github.io/2019/01/04/疯狂java实战演义之仿windows计算器/cal.PNG">
+
+
+
+
+
+
+  <link rel="canonical" href="https://18867835693.github.io/2019/01/04/疯狂java实战演义之仿windows计算器/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>疯狂java实战演义之仿windows计算器 | 逆飞的时光</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">逆飞的时光</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/01/04/疯狂java实战演义之仿windows计算器/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Facewaller">
+      <meta itemprop="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逆飞的时光">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">疯狂java实战演义之仿windows计算器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time itemprop="dateCreated datePublished" datetime="2019-01-04T15:44:07+08:00">2019-01-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time itemprop="dateModified" datetime="2019-01-04T16:50:03+08:00">2019-01-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/几个小项目实践/" itemprop="url" rel="index"><span itemprop="name">几个小项目实践</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>Windows计算器，是Windows操作系统自带计算器，可以帮助用户完成数据的运算，它可分为“标准型”和“科学型”，本仿Windows计算器是标准型的Java实现，标准型Windows计算器实现的主要功能有：四则运算；求倒数；求开方；存储计算结果；读取计算结果；累积计算结果。本项目将使用到JFrame和JPanel两个Swing容器，使用到JTextField和JButton两个Swing容器，使用BorderLayout和GridLayout做两个布局器，以及使用到事件、事件监听器和事件适配器等。实现一个计算器，界面中需要提供各种输入的按钮，再以这些按钮组成计算器的键盘，用户点击键盘输入值后，就可以将其所输入的值显示到一个文本框中，运算后，再将结果显示到文本框中。计算器的最终效果如图所示。</p>
+<p><img src="/2019/01/04/疯狂java实战演义之仿windows计算器/cal.PNG" alt="cal"></p>
+<a id="more"></a>
+<h2 id="建立计算器对象"><a href="#建立计算器对象" class="headerlink" title="建立计算器对象"></a>建立计算器对象</h2><p>实现一个计算器，需要建立一系列的对象来实现，例如，计算界面我们要建立一个界面类，还需要建立一个专门负责处理加、减、乘、除的基本计算类，还需要一个负责处理计算功能的业务类。本项目主要设计四个类来完成计算器的功能，界面类（CalFrame）——主要用来显示计算器界面，功能类（CalService）——主要用于完成计算器中的逻辑功能，计算工具类（MyMath）——此类是工具类，用于处理大型数字的加减乘除，计算器类(Cal)——用于打开计算器，计算器中各个类的关系如图所示。</p>
+<p><img src="/2019/01/04/疯狂java实战演义之仿windows计算器/class.PNG" alt="类"></p>
+<h3 id="MyMath工具类"><a href="#MyMath工具类" class="headerlink" title="MyMath工具类"></a>MyMath工具类</h3><p>使用 float，double 两种浮点基本类型来进行计算，容易损失精度，所以，我们使用一个自己定义了加，减，乘，除方法的类，此类使用 BigDecimal 来封装基本类型，在不损失精度的同时，也可以进行超大数字的四则运算。为了方便调用，此类的方法全部都是静态方法，可以直接用“类名.方法名”调用，这个类包含以下方法：</p>
+<ul>
+<li><p><code>static double add( double num1, double num2 )</code> 加法，使用来计算结果的数字是封装后的num1 和 num2，并返回 double 类型。</p>
+</li>
+<li><p><code>static double subtract ( double num1, double num2 )</code> 减法，使用来计算结果的数字是封装后的 num1 和 num2，并返回 double 类型。</p>
+</li>
+<li><p><code>static double multiply ( double num1, double num2 )</code> 乘法，使用来计算结果的数字是封装后的 num1 和 num2，并返回 double 类型。</p>
+</li>
+<li><p><code>static double divide ( double num1, double num2 )</code> 除法，使用来计算结果的数字是封装后的num1 和 num2，并返回 double 类型。</p>
+</li>
+</ul>
+<p>MyMath 类提供了基础的四则运算方法，由于该类中所有的方法都是静态的，因此外界可以直接调用。在实现 MyMath 的过程中需要注意的是，这几个四则运算方法，参数都是 double 类型的，要进行运算的话，需要将 double 类型转换成一个 BigDecimal 对象。</p>
+<h3 id="CalService类"><a href="#CalService类" class="headerlink" title="CalService类"></a>CalService类</h3><p>CalService 类主要是用来处理计算器的业务逻辑，用户在操作计算器时，此类将计算结果，并且返回，并且，会记录计算器的状态（用户的上一步操作）。包含以下方法：</p>
+<ul>
+<li><p><code>String callMethod( String cmd , String text )</code> 调用方法并返回计算结果。</p>
+</li>
+<li><p><code>String cal( String text , boolean isPercent )</code> 用来计算加、减、乘、除法，并返回封装成 String内型的结果。参数 text 是显示框中的数字内容，boolean 类型的参数 isPercent 代表是否有”%”运算，如果有，便加上去。</p>
+</li>
+<li><p><code>String setReciprocal( String text )</code> 用来计算倒数，并返回封装成 String 内型的结果。</p>
+</li>
+<li><p><code>String sqrt( String text )</code> 用来计算开方，并返回封装成 String 内型的结果。</p>
+</li>
+<li><p><code>String setOp( String cmd , String text )</code> 设置操作符号。</p>
+</li>
+<li><p><code>String setNegative( String text )</code> 设置正负数，当 text 是正数时，返回负数的数字字符串，反之，则返回正数的数字字符串。</p>
+</li>
+<li><p><code>String catNum( String cmd, String text )</code> 连接输入的数字，每次点击数字，就把把新加的数字追加到后面，并封装成字符串返回。</p>
+</li>
+<li><p><code>String backSpace( String text )</code> 删除最后一个字符，并返回结果。</p>
+</li>
+<li><p><code>String mCmd( String cmd, String text )</code> 用来实现“M+”、“MC”、“MR”、“MS”与存<br>储有关的功能。</p>
+</li>
+<li><p><code>String clearAll()</code> 清除所有计算结果。</p>
+</li>
+<li><p><code>String clear( String text)</code> 清除上次计算结果。</p>
+</li>
+</ul>
+<p>CalService 类中的各个方法都是用于处理计算的逻辑，其中 callMethod 方法可以看作中一个中转的方法，根据参数中的 cmd 值进行分发处理，例如调用该方法时将“CE”字符串作cmd，那么该方法就根据这个字符串再调用需要执行“CE”的方法。如果需要做更好的程序解耦，我们可以将这些做成一个状态模式，将各个计算的方法都抽象成一个计算接口，该接口提供一个计算的方法，然后按照具体的情况，为该接口提供不同的实现，例如计算开方、计算倒数等实现，然后向 callMethod 传入不同的实现类，直接调用接口方法。</p>
+<h3 id="CalFrame类"><a href="#CalFrame类" class="headerlink" title="CalFrame类"></a>CalFrame类</h3><p>CalFrame 类继承 javax.swing.Jframe 类，主要是用于计算器界面的实现，此类中，排版了计算器中各个组件的位置，为组件增加事件监听器，用来监听用户的操作，并做调用相应的方法，主要包含以下方法：</p>
+<ul>
+<li><p><code>void initialize()</code>，初始化计算器界面。</p>
+</li>
+<li><p><code>ActionListener getActionListener()</code> 如果动作监听器为空，则创建一个，并返回，如果不为空，直接返回。</p>
+</li>
+<li><p><code>JTextField getTextField()</code> 这个方法初始化输入框。</p>
+</li>
+<li><p><code>JButton[] getMButton()</code> 此方法获得计算器的存储操作键。</p>
+</li>
+<li><p><code>JButton[] getRButton()</code> 此方法获得计算器的结果操作键。</p>
+</li>
+<li><p><code>JButton[] getNButton()</code> 此方法获得计算器的其它操作键。</p>
+</li>
+</ul>
+<p>由于 CalFrame 是界面类，因此所需要进行的业务处理并不多，更多的是监听用户的操作，并进行分发处理。这就有点像 web 应用中的 MVC 模式中的 V（视图），并不处理任务的业务逻辑，主要职责是显示相应的数据。在本项目中，CalFrame 包括了一些监听器，监听界面事件并调用相关的业务方法，在实际开发中，我们可以将这些监听器作为 MVC 模式中的 C（控制器）提取到另外的类中。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="CalFrame-java"><a href="#CalFrame-java" class="headerlink" title="CalFrame.java"></a>CalFrame.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> FaceWaller</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CalFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示计算结果的textField</span></span><br><span class="line">    <span class="keyword">private</span> JTextField textField = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 用一个数组保存MC,MR,MS,M+等操作符</span></span><br><span class="line">    <span class="keyword">private</span> String[] mOp = &#123;<span class="string">"MC"</span>, <span class="string">"MR"</span>, <span class="string">"MS"</span>, <span class="string">"M+"</span>&#125;;</span><br><span class="line">    <span class="comment">// 用一个数组保存结果操作符</span></span><br><span class="line">    <span class="keyword">private</span> String[] rOp = &#123;<span class="string">"Back"</span>, <span class="string">"CE"</span>, <span class="string">"C"</span>&#125;;</span><br><span class="line">    <span class="comment">// 用一个数组保存数字与其它操作符</span></span><br><span class="line">    <span class="keyword">private</span> String[] nOp = &#123;<span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span>, <span class="string">"/"</span>, <span class="string">"sqrt"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"*"</span>, <span class="string">"%"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"-"</span>, <span class="string">"1/x"</span>, <span class="string">"0"</span>, <span class="string">"+/-"</span>, <span class="string">"."</span>, <span class="string">"+"</span>, <span class="string">"="</span>&#125;;</span><br><span class="line">    <span class="comment">// M操作标志按钮</span></span><br><span class="line">    <span class="keyword">private</span> JButton button = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 业务逻辑类</span></span><br><span class="line">    <span class="keyword">private</span> CalService service = <span class="keyword">new</span> CalService();</span><br><span class="line">    <span class="comment">// 定义监听器</span></span><br><span class="line">    <span class="keyword">private</span> ActionListener actionListener = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 设置panel的宽</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> PRE_WIDTH = <span class="number">360</span>;</span><br><span class="line">    <span class="comment">// 设置panel的高</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> PRE_HEIGHT = <span class="number">250</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CalFrame</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        initialize();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setTitle(<span class="string">"计算器"</span>);</span><br><span class="line">        <span class="keyword">this</span>.setResizable(<span class="keyword">false</span>);<span class="comment">//设置大小不可改变</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//增加计算输入框</span></span><br><span class="line">        JPanel panel = <span class="keyword">new</span> JPanel();</span><br><span class="line">        panel.setLayout(<span class="keyword">new</span> BorderLayout(<span class="number">10</span>, <span class="number">1</span>));</span><br><span class="line">        panel.add(getTextField(), BorderLayout.NORTH);</span><br><span class="line">        panel.setPreferredSize(<span class="keyword">new</span> Dimension(PRE_WIDTH, PRE_HEIGHT));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//增加左边存储操作键</span></span><br><span class="line">        JButton[] mButton = getMButton();</span><br><span class="line">        JPanel panel1 = <span class="keyword">new</span> JPanel();</span><br><span class="line">        panel1.setLayout(<span class="keyword">new</span> GridLayout(<span class="number">5</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">5</span>));</span><br><span class="line">        <span class="keyword">for</span> (JButton b : mButton) &#123;</span><br><span class="line">            panel1.add(b);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//增加结果操作键</span></span><br><span class="line">        JButton[] rButton = getRButton();</span><br><span class="line">        JPanel panel2 = <span class="keyword">new</span> JPanel();</span><br><span class="line">        panel2.setLayout(<span class="keyword">new</span> BorderLayout(<span class="number">1</span>, <span class="number">5</span>));</span><br><span class="line">        JPanel panel21 = <span class="keyword">new</span> JPanel();</span><br><span class="line">        panel21.setLayout(<span class="keyword">new</span> GridLayout(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">        <span class="keyword">for</span> (JButton b : rButton) &#123;</span><br><span class="line">            panel21.add(b);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//增加数字与其它运算符</span></span><br><span class="line">        JButton[] nButton = getNButton();</span><br><span class="line">        JPanel panel22 = <span class="keyword">new</span> JPanel();</span><br><span class="line">        panel22.setLayout(<span class="keyword">new</span> GridLayout(<span class="number">4</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">5</span>));</span><br><span class="line">        <span class="keyword">for</span> (JButton b : nButton) &#123;</span><br><span class="line">            panel22.add(b);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        panel2.add(panel21, BorderLayout.NORTH);</span><br><span class="line">        panel2.add(panel22, BorderLayout.CENTER);</span><br><span class="line">        panel.add(panel1, BorderLayout.WEST);</span><br><span class="line">        panel.add(panel2, BorderLayout.CENTER);</span><br><span class="line">        <span class="keyword">this</span>.add(panel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ActionListener <span class="title">getActionListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (actionListener == <span class="keyword">null</span>) &#123;</span><br><span class="line">            actionListener = <span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">                    String cmd = e.getActionCommand();</span><br><span class="line">                    String result = <span class="keyword">null</span>;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        <span class="comment">// 计算操作结果</span></span><br><span class="line">                        result = service.callMethod(cmd, textField.getText());</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e1) &#123;</span><br><span class="line">                        System.out.println(e1.getMessage());</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// 处理button的标记</span></span><br><span class="line">                    <span class="keyword">if</span> (cmd.indexOf(<span class="string">"MC"</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">                        button.setText(<span class="string">""</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cmd.indexOf(<span class="string">"M"</span>) == <span class="number">0</span> &amp;&amp; service.getStore() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        button.setText(<span class="string">"M"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// 设置计算结果</span></span><br><span class="line">                    <span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        textField.setText(result);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> actionListener;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> JButton <span class="title">getButton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (button == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 设置默认值为0</span></span><br><span class="line">            button = <span class="keyword">new</span> JButton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> button;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> JTextField <span class="title">getTextField</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (textField == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 设置默认值为0</span></span><br><span class="line">            textField = <span class="keyword">new</span> JTextField(<span class="string">"0"</span>);</span><br><span class="line">            <span class="comment">// 设置为不可编辑</span></span><br><span class="line">            textField.setEditable(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// 设置背景为白色</span></span><br><span class="line">            textField.setBackground(Color.white);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> textField;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建操作按键</span></span><br><span class="line">    <span class="keyword">private</span> JButton[] getMButton() &#123;</span><br><span class="line">        JButton[] result = <span class="keyword">new</span> JButton[mOp.length + <span class="number">1</span>];</span><br><span class="line">        result[<span class="number">0</span>] = getButton();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="keyword">this</span>.mOp.length;i++)&#123;</span><br><span class="line">            JButton b = <span class="keyword">new</span> JButton(<span class="keyword">this</span>.mOp[i]);</span><br><span class="line">            b.addActionListener(getActionListener());</span><br><span class="line">            b.setForeground(Color.red);</span><br><span class="line">            result[i + <span class="number">1</span>] = b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> JButton[] getRButton() &#123;</span><br><span class="line">        JButton[] result = <span class="keyword">new</span> JButton[rOp.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="keyword">this</span>.rOp.length;i++)&#123;</span><br><span class="line">            JButton b = <span class="keyword">new</span> JButton(<span class="keyword">this</span>.rOp[i]);</span><br><span class="line">            b.addActionListener(getActionListener());</span><br><span class="line">            b.setForeground(Color.red);</span><br><span class="line">            result[i] = b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> JButton[] getNButton() &#123;<span class="comment">//创建运算键</span></span><br><span class="line">        String[] redButton = &#123;<span class="string">"/"</span>, <span class="string">"*"</span>, <span class="string">"-"</span>, <span class="string">"+"</span>, <span class="string">"="</span>&#125;;</span><br><span class="line">        JButton[] result = <span class="keyword">new</span> JButton[nOp.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.nOp.length; i++) &#123;</span><br><span class="line">            JButton b = <span class="keyword">new</span> JButton(<span class="keyword">this</span>.nOp[i]);</span><br><span class="line">            b.addActionListener(getActionListener());</span><br><span class="line">            Arrays.sort(redButton);</span><br><span class="line">            <span class="keyword">if</span> (Arrays.binarySearch(redButton, nOp[i]) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                b.setForeground(Color.red);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                b.setForeground(Color.blue);</span><br><span class="line">            &#125;</span><br><span class="line">            result[i] = b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="MyMath-java"><a href="#MyMath-java" class="headerlink" title="MyMath.java"></a>MyMath.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.math.BigDecimal;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> FaceWaller</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMath</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 保留小数点位数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_SCALE = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//为一个double类型的数字创建BigDecimal对象进行四则运算</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> BigDecimal <span class="title">getBigDecimal</span><span class="params">(<span class="keyword">double</span> number)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BigDecimal(number);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span> num1,<span class="keyword">double</span> num2)</span></span>&#123;<span class="comment">//加法</span></span><br><span class="line">        <span class="comment">//调用getBigDecimail()将double转换成BigDecimail</span></span><br><span class="line">        BigDecimal first = getBigDecimal(num1);</span><br><span class="line">        BigDecimal second = getBigDecimal(num2);</span><br><span class="line">        <span class="keyword">return</span> first.add(second).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">subtract</span><span class="params">(<span class="keyword">double</span> num1,<span class="keyword">double</span> num2)</span></span>&#123;<span class="comment">//减法</span></span><br><span class="line">        BigDecimal first = getBigDecimal(num1);</span><br><span class="line">        BigDecimal second = getBigDecimal(num2);</span><br><span class="line">        <span class="keyword">return</span>  first.subtract(second).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">multiply</span><span class="params">(<span class="keyword">double</span> num1,<span class="keyword">double</span> num2)</span></span>&#123;<span class="comment">//乘法</span></span><br><span class="line">        BigDecimal first = getBigDecimal(num1);</span><br><span class="line">        BigDecimal second = getBigDecimal(num2);</span><br><span class="line">        <span class="keyword">return</span> first.multiply(second).doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">divide</span><span class="params">(<span class="keyword">double</span> num1,<span class="keyword">double</span> num2)</span></span>&#123;<span class="comment">//除法</span></span><br><span class="line">        BigDecimal first = getBigDecimal(num1);</span><br><span class="line">        BigDecimal second = getBigDecimal(num2);</span><br><span class="line">        <span class="keyword">return</span> first.divide(second, DEFAULT_SCALE, BigDecimal.ROUND_HALF_UP)</span><br><span class="line">                .doubleValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="CalService-java"><a href="#CalService-java" class="headerlink" title="CalService.java"></a>CalService.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sun.jdi.DoubleValue;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> FaceWaller</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CalService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存储器,默认为0，用于保存需要暂时保存的计算结果</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> store = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 第一个操作数</span></span><br><span class="line">    <span class="keyword">private</span> String firstNum = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 上次操作</span></span><br><span class="line">    <span class="keyword">private</span> String lastOp = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 第二个操作数</span></span><br><span class="line">    <span class="keyword">private</span> String secondNum = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 是否第二个操作数，如果是，点击数字键时，则在文本框中重新输入</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isSecondNum = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数字</span></span><br><span class="line">    <span class="keyword">private</span> String numString = <span class="string">"0123456789."</span>;</span><br><span class="line">    <span class="comment">// 四则运算</span></span><br><span class="line">    <span class="keyword">private</span> String opString = <span class="string">"+-*/"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CalService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">callMethod</span><span class="params">(String cmd,String text)</span></span>&#123;<span class="comment">//调用方法并返回计算结果</span></span><br><span class="line">        <span class="keyword">if</span>(cmd.equals(<span class="string">"C"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> clearAll();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"CE"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> clear(text);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"Back"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> backSpace(text);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(numString.indexOf(cmd) != -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> catNum(cmd,text);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(opString.indexOf(cmd) != -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> setOp(cmd, text);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"="</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> cal(text,<span class="keyword">false</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"+/-"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> setNegative(text);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"1/x"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> setReciprocal(text);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"sqrt"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> sqrt(text);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"%"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> cal(text,<span class="keyword">true</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mCmd(cmd,text);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">cal</span><span class="params">(String text,<span class="keyword">boolean</span> isPercent)</span></span>&#123;<span class="comment">//计算加减乘除，isPercent代表是否有%运算</span></span><br><span class="line">        <span class="keyword">double</span> secondResult = secondNum == <span class="keyword">null</span> ? Double.valueOf(text).doubleValue() : Double.valueOf(secondNum).doubleValue();</span><br><span class="line">        <span class="keyword">if</span>(secondResult == <span class="number">0</span> &amp;&amp; <span class="keyword">this</span>.lastOp.equals(<span class="string">"/"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(isPercent)&#123;</span><br><span class="line">            secondResult = MyMath.multiply(Double.valueOf(firstNum),MyMath.multiply(secondResult,<span class="number">100</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//四则运算，返回结果赋给第一个操作数</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.lastOp.equals(<span class="string">"+"</span>))&#123;</span><br><span class="line">            firstNum = String.valueOf(MyMath.add(Double.valueOf(firstNum),secondResult));</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.lastOp.equals(<span class="string">"-"</span>))&#123;</span><br><span class="line">            firstNum = String.valueOf(MyMath.subtract(Double.valueOf(firstNum),secondResult));</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.lastOp.equals(<span class="string">"*"</span>))&#123;</span><br><span class="line">            firstNum = String.valueOf(MyMath.multiply(Double.valueOf(firstNum),secondResult));</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.lastOp.equals(<span class="string">"/"</span>))&#123;</span><br><span class="line">            firstNum = String.valueOf(MyMath.divide(Double.valueOf(firstNum),secondResult));</span><br><span class="line">        &#125;</span><br><span class="line">        secondNum = secondNum == <span class="keyword">null</span> ? text : secondNum;</span><br><span class="line">        <span class="keyword">this</span>.isSecondNum = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> firstNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">setReciprocal</span><span class="params">(String text)</span></span>&#123;<span class="comment">//计算倒数</span></span><br><span class="line">        <span class="keyword">if</span>(text.equals(<span class="string">"0"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> text;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.isSecondNum = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">return</span> String.valueOf(MyMath.divide(<span class="number">1</span>,Double.valueOf(text)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sqrt</span><span class="params">(String text)</span></span>&#123;<span class="comment">//开方</span></span><br><span class="line">        <span class="keyword">this</span>.isSecondNum = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> String.valueOf(Math.sqrt(Double.valueOf(text)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">setOp</span><span class="params">(String cmd,String text)</span></span>&#123;<span class="comment">//设置操作符号</span></span><br><span class="line">        <span class="keyword">this</span>.lastOp = cmd;</span><br><span class="line">        <span class="keyword">this</span>.firstNum = text;</span><br><span class="line">        <span class="keyword">this</span>.secondNum = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">this</span>.isSecondNum = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">setNegative</span><span class="params">(String text)</span></span>&#123;<span class="comment">//设置正负数</span></span><br><span class="line">        <span class="comment">// 如果text是负数，就将它变为正数</span></span><br><span class="line">        <span class="keyword">if</span> (text.indexOf(<span class="string">"-"</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> text.substring(<span class="number">1</span>, text.length());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 否则，将正数变成负数</span></span><br><span class="line">        <span class="keyword">return</span> text.equals(<span class="string">"0"</span>) ? text : <span class="string">"-"</span> + text;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">catNum</span><span class="params">(String cmd,String text)</span></span>&#123;<span class="comment">//连接输入的数字</span></span><br><span class="line">        String result = cmd;</span><br><span class="line">        <span class="keyword">if</span>(!text.equals(<span class="string">"0"</span>))&#123;</span><br><span class="line">            <span class="keyword">if</span>(isSecondNum)&#123;</span><br><span class="line">                isSecondNum = <span class="keyword">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                result = cmd + text;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(result.indexOf(<span class="string">"0"</span>) == <span class="number">0</span>)&#123;</span><br><span class="line">            result = <span class="string">"0"</span> + result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">backSpace</span><span class="params">(String text)</span></span>&#123;<span class="comment">//删除最后一个字符</span></span><br><span class="line">        <span class="keyword">return</span> text.equals(<span class="string">"0"</span>) || text.equals(<span class="string">""</span>) ? <span class="string">"0"</span> : text.substring(<span class="number">0</span>,text.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">mCmd</span><span class="params">(String cmd,String text)</span></span>&#123;<span class="comment">//用来实现“M+”、“MC”、“MR”、“MS”与存储有关的功能</span></span><br><span class="line">        <span class="keyword">if</span>(cmd.equals(<span class="string">"M+"</span>))&#123;</span><br><span class="line">            store = MyMath.add(store,Double.valueOf(text));</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"MC"</span>))&#123;</span><br><span class="line">            store = <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"MR"</span>))&#123;</span><br><span class="line">            isSecondNum = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">return</span> String.valueOf(store);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmd.equals(<span class="string">"MS"</span>))&#123;</span><br><span class="line">            store = Double.valueOf(text).doubleValue();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">clearAll</span><span class="params">()</span></span>&#123;<span class="comment">//清除所有计算结果</span></span><br><span class="line">        <span class="keyword">this</span>.firstNum = <span class="string">"0"</span>;</span><br><span class="line">        <span class="keyword">this</span>.secondNum = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> firstNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">clear</span><span class="params">(String text)</span></span>&#123;<span class="comment">//清除上次计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getStore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.store;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Main-java"><a href="#Main-java" class="headerlink" title="Main.java"></a>Main.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> FaceWaller</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        CalFrame f = <span class="keyword">new</span> CalFrame();</span><br><span class="line">        f.pack();</span><br><span class="line">        f.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/swing/" rel="tag"># swing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/01/2019年了、、、/" rel="next" title="2019年了、、、">
+                <i class="fa fa-chevron-left"></i> 2019年了、、、
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Facewaller">
+            
+              <p class="site-author-name" itemprop="name">Facewaller</p>
+              <p class="site-description motion-element" itemprop="description">“暮色苍茫看劲松，乱云飞渡仍从容”</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/5710147235/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="Weibo &rarr; https://weibo.com/5710147235/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立计算器对象"><span class="nav-text">建立计算器对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MyMath工具类"><span class="nav-text">MyMath工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CalService类"><span class="nav-text">CalService类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CalFrame类"><span class="nav-text">CalFrame类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CalFrame-java"><span class="nav-text">CalFrame.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyMath-java"><span class="nav-text">MyMath.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CalService-java"><span class="nav-text">CalService.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Main-java"><span class="nav-text">Main.java</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Facewaller</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
