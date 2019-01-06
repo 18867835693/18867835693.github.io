@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="Mysql学习目标一、为什么要学习数据库 二、数据库的相关概念  DBMS、DB、SQL 三、数据库存储数据的特点 四、初始MySQL MySQL产品的介绍MySQL产品的安装          ★MySQL服务的启动和停止     ★MySQL服务的登录和退出     ★MySQL的常见命令和语法规范">
+  <meta name="description" content="数据库事务含义通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态 特点（ACID） 原子性：要么都执行，要么都回滚 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一">
 <meta name="keywords" content="mysql基础,SQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql笔记（一、基础介绍）">
-<meta property="og:url" content="https://18867835693.github.io/2018/12/10/mysql笔记（一、基础介绍）/index.html">
+<meta property="og:title" content="mysql笔记（三、事务，视图）">
+<meta property="og:url" content="https://18867835693.github.io/2019/01/06/mysql笔记（三、事务，视图）/index.html">
 <meta property="og:site_name" content="逆飞的时光">
-<meta property="og:description" content="Mysql学习目标一、为什么要学习数据库 二、数据库的相关概念  DBMS、DB、SQL 三、数据库存储数据的特点 四、初始MySQL MySQL产品的介绍MySQL产品的安装          ★MySQL服务的启动和停止     ★MySQL服务的登录和退出     ★MySQL的常见命令和语法规范">
+<meta property="og:description" content="数据库事务含义通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态 特点（ACID） 原子性：要么都执行，要么都回滚 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-06T13:40:46.137Z">
+<meta property="og:updated_time" content="2019-01-06T13:43:28.645Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql笔记（一、基础介绍）">
-<meta name="twitter:description" content="Mysql学习目标一、为什么要学习数据库 二、数据库的相关概念  DBMS、DB、SQL 三、数据库存储数据的特点 四、初始MySQL MySQL产品的介绍MySQL产品的安装          ★MySQL服务的启动和停止     ★MySQL服务的登录和退出     ★MySQL的常见命令和语法规范">
+<meta name="twitter:title" content="mysql笔记（三、事务，视图）">
+<meta name="twitter:description" content="数据库事务含义通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态 特点（ACID） 原子性：要么都执行，要么都回滚 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一">
 
 
 
 
 
 
-  <link rel="canonical" href="https://18867835693.github.io/2018/12/10/mysql笔记（一、基础介绍）/">
+  <link rel="canonical" href="https://18867835693.github.io/2019/01/06/mysql笔记（三、事务，视图）/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>mysql笔记（一、基础介绍） | 逆飞的时光</title>
+  <title>mysql笔记（三、事务，视图） | 逆飞的时光</title>
   
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2018/12/10/mysql笔记（一、基础介绍）/">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/01/06/mysql笔记（三、事务，视图）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Facewaller">
@@ -369,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql笔记（一、基础介绍）
+          <h1 class="post-title" itemprop="name headline">mysql笔记（三、事务，视图）
               
             
           </h1>
@@ -394,7 +394,7 @@
                 
               
 
-              <time itemprop="dateCreated datePublished" datetime="2018-12-10T21:22:36+08:00">2018-12-10</time>
+              <time itemprop="dateCreated datePublished" datetime="2019-01-06T21:34:05+08:00">2019-01-06</time>
             
 
             
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time itemprop="dateModified" datetime="2019-01-06T21:40:46+08:00">2019-01-06</time>
+                <time itemprop="dateModified" datetime="2019-01-06T21:43:28+08:00">2019-01-06</time>
               
             
           </span>
@@ -469,93 +469,105 @@
       
 
       
-        <h2 id="Mysql学习目标"><a href="#Mysql学习目标" class="headerlink" title="Mysql学习目标"></a>Mysql学习目标</h2><p>一、为什么要学习数据库</p>
-<p>二、数据库的相关概念 </p>
-<p>DBMS、DB、SQL</p>
-<p>三、数据库存储数据的特点</p>
-<p>四、初始MySQL</p>
-<p>MySQL产品的介绍<br>MySQL产品的安装          ★<br>MySQL服务的启动和停止     ★<br>MySQL服务的登录和退出     ★<br>MySQL的常见命令和语法规范</p>
-<a id="more"></a>
-<p>五、DQL语言的学习   ★</p>
-<p>基础查询        ★<br>条件查询         ★<br>排序查询         ★<br>常见函数        ★<br>分组函数        ★<br>分组查询           ★<br>连接查询         ★<br>子查询       √<br>分页查询       ★<br>union联合查询    √</p>
-<p>六、DML语言的学习    ★</p>
-<p>插入语句</p>
-<p>修改语句</p>
-<p>删除语句</p>
-<p>七、DDL语言的学习</p>
-<p>库和表的管理     √    </p>
-<p>常见数据类型介绍  √   </p>
-<p>常见约束        √        </p>
-<p>八、TCL语言的学习</p>
-<p>事务和事务处理    </p>
-<p>九、视图的讲解           √</p>
-<p>十、变量         </p>
-<p>十一、存储过程和函数   </p>
-<p>十二、流程控制结构       </p>
-<h2 id="数据库的好处"><a href="#数据库的好处" class="headerlink" title="数据库的好处"></a>数据库的好处</h2><p>1.持久化数据到本地</p>
-<p>2.可以实现结构化查询，方便管理</p>
-<h2 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h2><p>1、DB：数据库，保存一组有组织的数据的容器</p>
-<p>2、DBMS：数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据</p>
-<p>3、SQL:结构化查询语言，用于和DBMS通信的语言</p>
-<h2 id="数据库存储数据的特点"><a href="#数据库存储数据的特点" class="headerlink" title="数据库存储数据的特点"></a>数据库存储数据的特点</h2><p>1、将数据放到表中，表再放到库中</p>
-<p>2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。</p>
-<p>3、表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。</p>
-<p>4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”</p>
-<p>5、表中的数据是按行存储的，每一行类似于java中的“对象”。</p>
-<h2 id="MySQL产品的介绍和安装"><a href="#MySQL产品的介绍和安装" class="headerlink" title="MySQL产品的介绍和安装"></a>MySQL产品的介绍和安装</h2><p>具体内容请移步 <a href="https://www.mysql.com/downloads/" target="_blank" rel="noopener">Oracle官网</a></p>
-<h2 id="MySQL服务的启动和停止"><a href="#MySQL服务的启动和停止" class="headerlink" title="MySQL服务的启动和停止"></a>MySQL服务的启动和停止</h2><p>方式一：计算机——右击管理——服务</p>
-<p>方式二：通过管理员身份运行</p>
-<p>net start 服务名（启动服务）</p>
-<p>net stop 服务名（停止服务）</p>
-<h2 id="MySQL服务的登录和退出"><a href="#MySQL服务的登录和退出" class="headerlink" title="MySQL服务的登录和退出"></a>MySQL服务的登录和退出</h2><p>方式一：通过mysql自带的客户端</p>
-<p>只限于root用户</p>
-<p>方式二：通过windows自带的客户端</p>
-<p>登录：</p>
-<p><code>mysql 【-h主机名 -P端口号 】-u用户名 -p密码</code></p>
-<p>退出：</p>
-<p><code>exit</code> 或 <code>ctrl+C</code></p>
-<h2 id="MySQL的常见命令"><a href="#MySQL的常见命令" class="headerlink" title="MySQL的常见命令"></a>MySQL的常见命令</h2><p>1.查看当前所有的数据库</p>
-<p><code>show databases;</code></p>
-<p>2.打开指定的库</p>
-<p><code>use 库名</code></p>
-<p>3.查看当前库的所有表</p>
-<p><code>show tables;</code></p>
-<p>4.查看其它库的所有表</p>
-<p><code>show tables from 库名;</code></p>
-<p>5.创建表</p>
-<p><code>create table 表名(列名 列类型,列名 列类型，...);</code></p>
-<p>6.查看表结构</p>
-<p><code>desc 表名;</code></p>
-<p>7.查看服务器的版本</p>
-<p>方式一：登录到mysql服务端</p>
-<p><code>select version();</code></p>
-<p>方式二：没有登录到mysql服务端</p>
-<p><code>mysql --version</code></p>
-<p>或</p>
-<p><code>mysql --V</code></p>
-<h2 id="MySQL的语法规范"><a href="#MySQL的语法规范" class="headerlink" title="MySQL的语法规范"></a>MySQL的语法规范</h2><p>1.不区分大小写,但建议关键字大写，表名、列名小写</p>
-<p>2.每条命令最好用分号结尾</p>
-<p>3.每条命令根据需要，可以进行缩进 或换行</p>
-<p>4.注释</p>
-<p>单行注释：#注释文字</p>
-<p>单行注释：– 注释文字</p>
-<p>多行注释：/<em> 注释文字  </em>/</p>
-<h2 id="SQL的语言分类"><a href="#SQL的语言分类" class="headerlink" title="SQL的语言分类"></a>SQL的语言分类</h2><p>DQL（Data Query Language）：数据查询语言</p>
-<p><code>select</code> </p>
-<p>DML(Data Manipulate Language):数据操作语言</p>
-<p><code>insert 、update、delete</code></p>
-<p>DDL（Data Define Languge）：数据定义语言</p>
-<p><code>create、drop、alter</code></p>
-<p>TCL（Transaction Control Language）：事务控制语言</p>
-<p><code>commit、rollback</code></p>
-<h2 id="SQL的常见命令"><a href="#SQL的常见命令" class="headerlink" title="SQL的常见命令"></a>SQL的常见命令</h2><p><code>show databases；</code> 查看所有的数据库</p>
-<p><code>use 库名；</code> 打开指定的库</p>
-<p><code>show tables ;</code> 显示库中的所有表</p>
-<p><code>show tables from 库名;</code> 显示指定库中的所有表</p>
-<p><code>create table 表名(字段名 字段类型,    字段名 字段类型);</code> 创建表</p>
-<p><code>desc 表名;</code> 查看指定表的结构</p>
-<p><code>select * from 表名;</code> 显示表中的所有数据</p>
+        <h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><pre><code>通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态
+</code></pre><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><pre><code>（ACID）
+原子性：要么都执行，要么都回滚
+一致性：保证数据的状态操作前和操作后保持一致
+隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰
+持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改
+</code></pre><p>相关步骤：</p>
+<pre><code>1、开启事务
+2、编写事务的一组逻辑操作单元（多条sql语句）
+3、提交事务或回滚事务
+</code></pre><a id="more"></a>
+<h3 id="事务的分类："><a href="#事务的分类：" class="headerlink" title="事务的分类："></a>事务的分类：</h3><p>隐式事务，没有明显的开启和结束事务的标志</p>
+<pre><code>比如
+insert、update、delete语句本身就是一个事务
+</code></pre><p>显式事务，具有明显的开启和结束事务的标志</p>
+<pre><code>1、开启事务
+取消自动提交事务的功能
 
+2、编写事务的一组逻辑操作单元（多条sql语句）
+insert
+update
+delete
+
+3、提交事务或回滚事务
+</code></pre><h3 id="使用到的关键字"><a href="#使用到的关键字" class="headerlink" title="使用到的关键字"></a>使用到的关键字</h3><pre><code>set autocommit=0;
+start transaction;
+commit;
+rollback;
+
+savepoint  断点
+commit to 断点
+rollback to 断点
+</code></pre><h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别:"></a>事务的隔离级别:</h3><p>事务并发问题如何发生？</p>
+<pre><code>当多个事务同时操作同一个数据库的相同数据时
+</code></pre><p>事务的并发问题有哪些？</p>
+<pre><code>脏读：一个事务读取到了另外一个事务未提交的数据
+不可重复读：同一个事务中，多次读取到的数据不一致
+幻读：一个事务读取数据时，另外一个事务进行更新，导致第一个事务读取到了没有更新的数据
+</code></pre><p>如何避免事务的并发问题？</p>
+<pre><code>通过设置事务的隔离级别
+1、READ UNCOMMITTED
+2、READ COMMITTED 可以避免脏读
+3、REPEATABLE READ 可以避免脏读、不可重复读和一部分幻读
+4、SERIALIZABLE可以避免脏读、不可重复读和幻读
+</code></pre><p>设置隔离级别：</p>
+<pre><code>set session|global  transaction isolation level 隔离级别名;
+</code></pre><p>查看隔离级别：</p>
+<pre><code>select @@tx_isolation;
+</code></pre><h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>含义：理解成一张虚拟的表</p>
+<p>视图和表的区别：</p>
+<pre><code>    使用方式    占用物理空间
+
+视图    完全相同    不占用，仅仅保存的是sql逻辑
+
+表    完全相同    占用
+</code></pre><p>视图的好处：</p>
+<pre><code>1、sql语句提高重用性，效率高
+2、和表实现了分离，提高了安全性
+</code></pre><h3 id="视图的创建"><a href="#视图的创建" class="headerlink" title="视图的创建"></a>视图的创建</h3><pre><code>语法：
+CREATE VIEW  视图名
+AS
+查询语句;
+</code></pre><h3 id="视图的增删改查"><a href="#视图的增删改查" class="headerlink" title="视图的增删改查"></a>视图的增删改查</h3><pre><code>1、查看视图的数据 ★
+
+SELECT * FROM my_v4;
+SELECT * FROM my_v1 WHERE last_name=&apos;Partners&apos;;
+
+2、插入视图的数据
+INSERT INTO my_v4(last_name,department_id) VALUES(&apos;虚竹&apos;,90);
+
+3、修改视图的数据
+
+UPDATE my_v4 SET last_name =&apos;梦姑&apos; WHERE last_name=&apos;虚竹&apos;;
+
+
+4、删除视图的数据
+DELETE FROM my_v4;
+</code></pre><h3 id="某些视图不能更新"><a href="#某些视图不能更新" class="headerlink" title="某些视图不能更新"></a>某些视图不能更新</h3><pre><code>包含以下关键字的sql语句：分组函数、distinct、group  by、having、union或者union all
+常量视图
+Select中包含子查询
+join
+from一个不能更新的视图
+where子句的子查询引用了from子句中的表
+</code></pre><h3 id="视图逻辑的更新"><a href="#视图逻辑的更新" class="headerlink" title="视图逻辑的更新"></a>视图逻辑的更新</h3><pre><code>#方式一：
+CREATE OR REPLACE VIEW test_v7
+AS
+SELECT last_name FROM employees
+WHERE employee_id&gt;100;
+
+#方式二:
+ALTER VIEW test_v7
+AS
+SELECT employee_id FROM employees;
+
+SELECT * FROM test_v7;
+</code></pre><h3 id="视图的删除"><a href="#视图的删除" class="headerlink" title="视图的删除"></a>视图的删除</h3><pre><code>DROP VIEW test_v1,test_v2,test_v3;
+</code></pre><h3 id="视图结构的查看"><a href="#视图结构的查看" class="headerlink" title="视图结构的查看"></a>视图结构的查看</h3><pre><code>DESC test_v7;
+SHOW CREATE VIEW test_v7;
+</code></pre>
       
     </div>
 
@@ -593,8 +605,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/08/Markdown基础语法/" rel="next" title="Markdownn基础语法">
-                <i class="fa fa-chevron-left"></i> Markdownn基础语法
+              <a href="/2019/01/04/疯狂java实战演义之仿windows计算器/" rel="next" title="疯狂java实战演义之仿windows计算器">
+                <i class="fa fa-chevron-left"></i> 疯狂java实战演义之仿windows计算器
               </a>
             
           </div>
@@ -602,10 +614,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/11/mysql笔记（二、SQL语言进阶）/" rel="prev" title="mysql笔记（二、SQL语言进阶）">
-                mysql笔记（二、SQL语言进阶） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -771,7 +779,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql学习目标"><span class="nav-text">Mysql学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的好处"><span class="nav-text">数据库的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库相关概念"><span class="nav-text">数据库相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库存储数据的特点"><span class="nav-text">数据库存储数据的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL产品的介绍和安装"><span class="nav-text">MySQL产品的介绍和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL服务的启动和停止"><span class="nav-text">MySQL服务的启动和停止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL服务的登录和退出"><span class="nav-text">MySQL服务的登录和退出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL的常见命令"><span class="nav-text">MySQL的常见命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL的语法规范"><span class="nav-text">MySQL的语法规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL的语言分类"><span class="nav-text">SQL的语言分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL的常见命令"><span class="nav-text">SQL的常见命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库事务"><span class="nav-text">数据库事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#含义"><span class="nav-text">含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的分类："><span class="nav-text">事务的分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用到的关键字"><span class="nav-text">使用到的关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的隔离级别"><span class="nav-text">事务的隔离级别:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的创建"><span class="nav-text">视图的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的增删改查"><span class="nav-text">视图的增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#某些视图不能更新"><span class="nav-text">某些视图不能更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图逻辑的更新"><span class="nav-text">视图逻辑的更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的删除"><span class="nav-text">视图的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图结构的查看"><span class="nav-text">视图结构的查看</span></a></li></ol></li></ol></div>
             
 
           </div>

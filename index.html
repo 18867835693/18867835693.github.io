@@ -351,6 +351,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/01/06/mysql笔记（三、事务，视图）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Facewaller">
+      <meta itemprop="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逆飞的时光">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/06/mysql笔记（三、事务，视图）/" class="post-title-link" itemprop="https://18867835693.github.io/index.html">mysql笔记（三、事务，视图）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time itemprop="dateCreated datePublished" datetime="2019-01-06T21:34:05+08:00">2019-01-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time itemprop="dateModified" datetime="2019-01-06T21:43:28+08:00">2019-01-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><pre><code>通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态
+</code></pre><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><pre><code>（ACID）
+原子性：要么都执行，要么都回滚
+一致性：保证数据的状态操作前和操作后保持一致
+隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰
+持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改
+</code></pre><p>相关步骤：</p>
+<pre><code>1、开启事务
+2、编写事务的一组逻辑操作单元（多条sql语句）
+3、提交事务或回滚事务
+</code></pre>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/01/06/mysql笔记（三、事务，视图）/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/01/04/疯狂java实战演义之仿windows计算器/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -945,7 +1133,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time itemprop="dateModified" datetime="2018-12-11T16:23:00+08:00">2018-12-11</time>
+                <time itemprop="dateModified" datetime="2019-01-06T21:40:40+08:00">2019-01-06</time>
               
             
           </span>
@@ -1139,7 +1327,7 @@ where
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time itemprop="dateModified" datetime="2018-12-11T12:50:08+08:00">2018-12-11</time>
+                <time itemprop="dateModified" datetime="2019-01-06T21:40:46+08:00">2019-01-06</time>
               
             
           </span>
@@ -1471,7 +1659,7 @@ where
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1504,8 +1692,6 @@ where
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
