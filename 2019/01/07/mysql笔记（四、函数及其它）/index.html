@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="数据库事务含义通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态 特点（ACID） 原子性：要么都执行，要么都回滚 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一">
+  <meta name="description" content="这是mysql基础笔记系列的最后篇 存储过程含义：一组经过预先编译的sql语句的集合好处： 1、提高了sql语句的重用性，减少了开发程序员的压力 2、提高了效率 3、减少了传输次数 分类： 1、无返回无参 2、仅仅带in类型，无返回有参 3、仅仅带out类型，有返回无参 4、既带in又带out，有返回有参 5、带inout，有返回有参 注意：in、out、inout都可以在一个存储过程中带多个">
 <meta name="keywords" content="mysql基础,SQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql笔记（三、事务，视图）">
-<meta property="og:url" content="https://18867835693.github.io/2019/01/06/mysql笔记（三、事务，视图）/index.html">
+<meta property="og:title" content="mysql笔记（四、函数及其它）">
+<meta property="og:url" content="https://18867835693.github.io/2019/01/07/mysql笔记（四、函数及其它）/index.html">
 <meta property="og:site_name" content="逆飞的时光">
-<meta property="og:description" content="数据库事务含义通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态 特点（ACID） 原子性：要么都执行，要么都回滚 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一">
+<meta property="og:description" content="这是mysql基础笔记系列的最后篇 存储过程含义：一组经过预先编译的sql语句的集合好处： 1、提高了sql语句的重用性，减少了开发程序员的压力 2、提高了效率 3、减少了传输次数 分类： 1、无返回无参 2、仅仅带in类型，无返回有参 3、仅仅带out类型，有返回无参 4、既带in又带out，有返回有参 5、带inout，有返回有参 注意：in、out、inout都可以在一个存储过程中带多个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-06T13:43:28.645Z">
+<meta property="og:updated_time" content="2019-01-07T10:18:52.346Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql笔记（三、事务，视图）">
-<meta name="twitter:description" content="数据库事务含义通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态 特点（ACID） 原子性：要么都执行，要么都回滚 一致性：保证数据的状态操作前和操作后保持一致 隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰 持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改 相关步骤： 1、开启事务 2、编写事务的一">
+<meta name="twitter:title" content="mysql笔记（四、函数及其它）">
+<meta name="twitter:description" content="这是mysql基础笔记系列的最后篇 存储过程含义：一组经过预先编译的sql语句的集合好处： 1、提高了sql语句的重用性，减少了开发程序员的压力 2、提高了效率 3、减少了传输次数 分类： 1、无返回无参 2、仅仅带in类型，无返回有参 3、仅仅带out类型，有返回无参 4、既带in又带out，有返回有参 5、带inout，有返回有参 注意：in、out、inout都可以在一个存储过程中带多个">
 
 
 
 
 
 
-  <link rel="canonical" href="https://18867835693.github.io/2019/01/06/mysql笔记（三、事务，视图）/">
+  <link rel="canonical" href="https://18867835693.github.io/2019/01/07/mysql笔记（四、函数及其它）/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>mysql笔记（三、事务，视图） | 逆飞的时光</title>
+  <title>mysql笔记（四、函数及其它） | 逆飞的时光</title>
   
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/01/06/mysql笔记（三、事务，视图）/">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/01/07/mysql笔记（四、函数及其它）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Facewaller">
@@ -369,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql笔记（三、事务，视图）
+          <h1 class="post-title" itemprop="name headline">mysql笔记（四、函数及其它）
               
             
           </h1>
@@ -394,7 +394,7 @@
                 
               
 
-              <time itemprop="dateCreated datePublished" datetime="2019-01-06T21:34:05+08:00">2019-01-06</time>
+              <time itemprop="dateCreated datePublished" datetime="2019-01-07T18:00:49+08:00">2019-01-07</time>
             
 
             
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time itemprop="dateModified" datetime="2019-01-06T21:43:28+08:00">2019-01-06</time>
+                <time itemprop="dateModified" datetime="2019-01-07T18:18:52+08:00">2019-01-07</time>
               
             
           </span>
@@ -469,104 +469,202 @@
       
 
       
-        <h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><pre><code>通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态
-</code></pre><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><pre><code>（ACID）
-原子性：要么都执行，要么都回滚
-一致性：保证数据的状态操作前和操作后保持一致
-隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰
-持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改
-</code></pre><p>相关步骤：</p>
-<pre><code>1、开启事务
-2、编写事务的一组逻辑操作单元（多条sql语句）
-3、提交事务或回滚事务
+        <p>这是mysql基础笔记系列的最后篇</p>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><p>含义：一组经过预先编译的sql语句的集合<br>好处：</p>
+<pre><code>1、提高了sql语句的重用性，减少了开发程序员的压力
+2、提高了效率
+3、减少了传输次数
+</code></pre><p>分类：</p>
+<pre><code>1、无返回无参
+2、仅仅带in类型，无返回有参
+3、仅仅带out类型，有返回无参
+4、既带in又带out，有返回有参
+5、带inout，有返回有参
+注意：in、out、inout都可以在一个存储过程中带多个
 </code></pre><a id="more"></a>
-<h3 id="事务的分类："><a href="#事务的分类：" class="headerlink" title="事务的分类："></a>事务的分类：</h3><p>隐式事务，没有明显的开启和结束事务的标志</p>
-<pre><code>比如
-insert、update、delete语句本身就是一个事务
-</code></pre><p>显式事务，具有明显的开启和结束事务的标志</p>
-<pre><code>1、开启事务
-取消自动提交事务的功能
+<h3 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h3><p>语法：</p>
+<pre><code>create procedure 存储过程名(in|out|inout 参数名  参数类型,...)
+begin
+    存储过程体
+end
+</code></pre><p>类似于方法：</p>
+<pre><code>修饰符 返回类型 方法名(参数类型 参数名,...){
 
-2、编写事务的一组逻辑操作单元（多条sql语句）
-insert
-update
-delete
+    方法体;
+}
+</code></pre><p>注意</p>
+<pre><code>1、需要设置新的结束标记
+delimiter 新的结束标记
+示例：
+delimiter $
 
-3、提交事务或回滚事务
-</code></pre><h3 id="使用到的关键字"><a href="#使用到的关键字" class="headerlink" title="使用到的关键字"></a>使用到的关键字</h3><pre><code>set autocommit=0;
-start transaction;
-commit;
-rollback;
+CREATE PROCEDURE 存储过程名(IN|OUT|INOUT 参数名  参数类型,...)
+BEGIN
+    sql语句1;
+    sql语句2;
 
-savepoint  断点
-commit to 断点
-rollback to 断点
-</code></pre><h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别:"></a>事务的隔离级别:</h3><p>事务并发问题如何发生？</p>
-<pre><code>当多个事务同时操作同一个数据库的相同数据时
-</code></pre><p>事务的并发问题有哪些？</p>
-<pre><code>脏读：一个事务读取到了另外一个事务未提交的数据
-不可重复读：同一个事务中，多次读取到的数据不一致
-幻读：一个事务读取数据时，另外一个事务进行更新，导致第一个事务读取到了没有更新的数据
-</code></pre><p>如何避免事务的并发问题？</p>
-<pre><code>通过设置事务的隔离级别
-1、READ UNCOMMITTED
-2、READ COMMITTED 可以避免脏读
-3、REPEATABLE READ 可以避免脏读、不可重复读和一部分幻读
-4、SERIALIZABLE可以避免脏读、不可重复读和幻读
-</code></pre><p>设置隔离级别：</p>
-<pre><code>set session|global  transaction isolation level 隔离级别名;
-</code></pre><p>查看隔离级别：</p>
-<pre><code>select @@tx_isolation;
-</code></pre><h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>含义：理解成一张虚拟的表</p>
-<p>视图和表的区别：</p>
-<pre><code>    使用方式    占用物理空间
+END $
 
-视图    完全相同    不占用，仅仅保存的是sql逻辑
+2、存储过程体中可以有多条sql语句，如果仅仅一条sql语句，则可以省略begin end
 
-表    完全相同    占用
-</code></pre><p>视图的好处：</p>
-<pre><code>1、sql语句提高重用性，效率高
-2、和表实现了分离，提高了安全性
-</code></pre><h3 id="视图的创建"><a href="#视图的创建" class="headerlink" title="视图的创建"></a>视图的创建</h3><pre><code>语法：
-CREATE VIEW  视图名
-AS
-查询语句;
-</code></pre><h3 id="视图的增删改查"><a href="#视图的增删改查" class="headerlink" title="视图的增删改查"></a>视图的增删改查</h3><pre><code>1、查看视图的数据 ★
+3、参数前面的符号的意思
+in:该参数只能作为输入 （该参数不能做返回值）
+out：该参数只能作为输出（该参数只能做返回值）
+inout：既能做输入又能做输出
+</code></pre><p>###调用存储过程</p>
+<pre><code>call 存储过程名(实参列表)
+</code></pre><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="创建函数"><a href="#创建函数" class="headerlink" title="创建函数"></a>创建函数</h3><p>学过的函数：LENGTH、SUBSTR、CONCAT等<br>语法：</p>
+<pre><code>CREATE FUNCTION 函数名(参数名 参数类型,...) RETURNS 返回类型
+BEGIN
+    函数体
 
-SELECT * FROM my_v4;
-SELECT * FROM my_v1 WHERE last_name=&apos;Partners&apos;;
+END
+</code></pre><h3 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h3><pre><code>SELECT 函数名（实参列表）
+</code></pre><h3 id="函数和存储过程的区别"><a href="#函数和存储过程的区别" class="headerlink" title="函数和存储过程的区别"></a>函数和存储过程的区别</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>关键字</th>
+<th>调用语法</th>
+<th>返回值</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>函数</td>
+<td>FUNCTION</td>
+<td>SELECT 函数()</td>
+<td>只能是一个</td>
+<td>一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个</td>
+</tr>
+<tr>
+<td>存储过程</td>
+<td>PROCEDURE</td>
+<td>CALL 存储过程()</td>
+<td>可以有0个或多个</td>
+<td>一般用于更新</td>
+</tr>
+</tbody>
+</table>
+<h2 id="流程控制结构"><a href="#流程控制结构" class="headerlink" title="流程控制结构"></a>流程控制结构</h2><h3 id="系统变量"><a href="#系统变量" class="headerlink" title="系统变量"></a>系统变量</h3><p>一、全局变量</p>
+<p>作用域：针对于所有会话（连接）有效，但不能跨重启</p>
+<pre><code>查看所有全局变量
+SHOW GLOBAL VARIABLES;
+查看满足条件的部分系统变量
+SHOW GLOBAL VARIABLES LIKE &apos;%char%&apos;;
+查看指定的系统变量的值
+SELECT @@global.autocommit;
+为某个系统变量赋值
+SET @@global.autocommit=0;
+SET GLOBAL autocommit=0;
+</code></pre><p>二、会话变量</p>
+<p>作用域：针对于当前会话（连接）有效</p>
+<pre><code>查看所有会话变量
+SHOW SESSION VARIABLES;
+查看满足条件的部分会话变量
+SHOW SESSION VARIABLES LIKE &apos;%char%&apos;;
+查看指定的会话变量的值
+SELECT @@autocommit;
+SELECT @@session.tx_isolation;
+为某个会话变量赋值
+SET @@session.tx_isolation=&apos;read-uncommitted&apos;;
+SET SESSION tx_isolation=&apos;read-committed&apos;;
+</code></pre><h3 id="自定义变量"><a href="#自定义变量" class="headerlink" title="自定义变量"></a>自定义变量</h3><p>一、用户变量</p>
+<p>声明并初始化：</p>
+<pre><code>SET @变量名=值;
+SET @变量名:=值;
+SELECT @变量名:=值;
+</code></pre><p>赋值：</p>
+<pre><code>方式一：一般用于赋简单的值
+SET 变量名=值;
+SET 变量名:=值;
+SELECT 变量名:=值;
 
-2、插入视图的数据
-INSERT INTO my_v4(last_name,department_id) VALUES(&apos;虚竹&apos;,90);
 
-3、修改视图的数据
+方式二：一般用于赋表 中的字段值
+SELECT 字段名或表达式 INTO 变量
+FROM 表;
+</code></pre><p>使用：</p>
+<pre><code>select @变量名;
+</code></pre><p>二、局部变量</p>
+<p>声明：</p>
+<pre><code>declare 变量名 类型 【default 值】;
+</code></pre><p>赋值：</p>
+<pre><code>方式一：一般用于赋简单的值
+SET 变量名=值;
+SET 变量名:=值;
+SELECT 变量名:=值;
 
-UPDATE my_v4 SET last_name =&apos;梦姑&apos; WHERE last_name=&apos;虚竹&apos;;
+方式二：一般用于赋表 中的字段值
+SELECT 字段名或表达式 INTO 变量
+FROM 表;
+</code></pre><p>使用：</p>
+<pre><code>select 变量名
+</code></pre><p>二者的区别：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用域</th>
+<th>定义位置</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户变量</td>
+<td>当前会话</td>
+<td>会话的任何地方</td>
+<td>加@符号，不用指定类型</td>
+</tr>
+<tr>
+<td>局部变量</td>
+<td>定义它的BEGIN END中</td>
+<td>BEGIN END的第一句话</td>
+<td>一般不用加@,需要指定类型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>一、if函数<br>    语法：if(条件，值1，值2)<br>    特点：可以用在任何位置</p>
+<p>二、case语句</p>
+<p>语法：</p>
+<pre><code>情况一：类似于switch
+case 表达式
+when 值1 then 结果1或语句1(如果是语句，需要加分号) 
+when 值2 then 结果2或语句2(如果是语句，需要加分号)
+...
+else 结果n或语句n(如果是语句，需要加分号)
+end 【case】（如果是放在begin end中需要加上case，如果放在select后面不需要）
 
+情况二：类似于多重if
+case 
+when 条件1 then 结果1或语句1(如果是语句，需要加分号) 
+when 条件2 then 结果2或语句2(如果是语句，需要加分号)
+...
+else 结果n或语句n(如果是语句，需要加分号)
+end 【case】（如果是放在begin end中需要加上case，如果放在select后面不需要）
+</code></pre><p>特点：</p>
+<pre><code>可以用在任何位置
+</code></pre><p>三、if elseif语句</p>
+<p>语法：</p>
+<pre><code>if 情况1 then 语句1;
+elseif 情况2 then 语句2;
+...
+else 语句n;
+end if;
+</code></pre><p>特点：<br>    只能用在begin end中！！！！！！！！！！！！！！！</p>
+<p>三者比较：<br>            应用场合<br>    if函数        简单双分支<br>    case结构    等值判断 的多分支<br>    if结构        区间判断 的多分支</p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>语法：</p>
+<pre><code>【标签：】WHILE 循环条件  DO
+    循环体
+END WHILE 【标签】;
+</code></pre><p>特点：</p>
+<pre><code>只能放在BEGIN END里面
 
-4、删除视图的数据
-DELETE FROM my_v4;
-</code></pre><h3 id="某些视图不能更新"><a href="#某些视图不能更新" class="headerlink" title="某些视图不能更新"></a>某些视图不能更新</h3><pre><code>包含以下关键字的sql语句：分组函数、distinct、group  by、having、union或者union all
-常量视图
-Select中包含子查询
-join
-from一个不能更新的视图
-where子句的子查询引用了from子句中的表
-</code></pre><h3 id="视图逻辑的更新"><a href="#视图逻辑的更新" class="headerlink" title="视图逻辑的更新"></a>视图逻辑的更新</h3><pre><code>#方式一：
-CREATE OR REPLACE VIEW test_v7
-AS
-SELECT last_name FROM employees
-WHERE employee_id&gt;100;
+如果要搭配leave跳转语句，需要使用标签，否则可以不用标签
 
-#方式二:
-ALTER VIEW test_v7
-AS
-SELECT employee_id FROM employees;
-
-SELECT * FROM test_v7;
-</code></pre><h3 id="视图的删除"><a href="#视图的删除" class="headerlink" title="视图的删除"></a>视图的删除</h3><pre><code>DROP VIEW test_v1,test_v2,test_v3;
-</code></pre><h3 id="视图结构的查看"><a href="#视图结构的查看" class="headerlink" title="视图结构的查看"></a>视图结构的查看</h3><pre><code>DESC test_v7;
-SHOW CREATE VIEW test_v7;
+leave类似于java中的break语句，跳出所在循环！！！
 </code></pre>
       
     </div>
@@ -605,8 +703,8 @@ SHOW CREATE VIEW test_v7;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/04/疯狂java实战演义之仿windows计算器/" rel="next" title="疯狂java实战演义之仿windows计算器">
-                <i class="fa fa-chevron-left"></i> 疯狂java实战演义之仿windows计算器
+              <a href="/2019/01/06/mysql笔记（三、事务，视图）/" rel="next" title="mysql笔记（三、事务，视图）">
+                <i class="fa fa-chevron-left"></i> mysql笔记（三、事务，视图）
               </a>
             
           </div>
@@ -614,10 +712,6 @@ SHOW CREATE VIEW test_v7;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/07/mysql笔记（四、函数及其它）/" rel="prev" title="mysql笔记（四、函数及其它）">
-                mysql笔记（四、函数及其它） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -783,7 +877,7 @@ SHOW CREATE VIEW test_v7;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库事务"><span class="nav-text">数据库事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#含义"><span class="nav-text">含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的分类："><span class="nav-text">事务的分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用到的关键字"><span class="nav-text">使用到的关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的隔离级别"><span class="nav-text">事务的隔离级别:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的创建"><span class="nav-text">视图的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的增删改查"><span class="nav-text">视图的增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#某些视图不能更新"><span class="nav-text">某些视图不能更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图逻辑的更新"><span class="nav-text">视图逻辑的更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的删除"><span class="nav-text">视图的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图结构的查看"><span class="nav-text">视图结构的查看</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储过程"><span class="nav-text">存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建存储过程"><span class="nav-text">创建存储过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建函数"><span class="nav-text">创建函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用函数"><span class="nav-text">调用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数和存储过程的区别"><span class="nav-text">函数和存储过程的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制结构"><span class="nav-text">流程控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统变量"><span class="nav-text">系统变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义变量"><span class="nav-text">自定义变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-text">分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-text">循环</span></a></li></ol></li></ol></div>
             
 
           </div>
