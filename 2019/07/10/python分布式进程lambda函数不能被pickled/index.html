@@ -108,23 +108,28 @@
 
 
 
-  <meta name="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
-<meta property="og:type" content="website">
-<meta property="og:title" content="逆飞的时光">
-<meta property="og:url" content="https://18867835693.github.io/categories/随笔/index.html">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在学习廖雪峰的分布式进程一节时, 在windowns下运行task_master.py文件出现PermissionError: [WinError 5] 拒绝访问错误. 经查询总结如下: 1) linux下创建进程使用fork(), windows平台下创建进程使用CreateProccess(). 2) fork">
+<meta name="keywords" content="多进程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python分布式进程lambda函数不能被pickled">
+<meta property="og:url" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/index.html">
 <meta property="og:site_name" content="逆飞的时光">
-<meta property="og:description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在学习廖雪峰的分布式进程一节时, 在windowns下运行task_master.py文件出现PermissionError: [WinError 5] 拒绝访问错误. 经查询总结如下: 1) linux下创建进程使用fork(), windows平台下创建进程使用CreateProccess(). 2) fork">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_master.png">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_worker.png">
+<meta property="og:updated_time" content="2019-07-10T15:15:38.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="逆飞的时光">
-<meta name="twitter:description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+<meta name="twitter:title" content="python分布式进程lambda函数不能被pickled">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在学习廖雪峰的分布式进程一节时, 在windowns下运行task_master.py文件出现PermissionError: [WinError 5] 拒绝访问错误. 经查询总结如下: 1) linux下创建进程使用fork(), windows平台下创建进程使用CreateProccess(). 2) fork">
+<meta name="twitter:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_master.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://18867835693.github.io/categories/随笔/">
+  <link rel="canonical" href="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/">
 
 
 
@@ -134,7 +139,7 @@
   };
 </script>
 
-  <title>分类: 随笔 | 逆飞的时光</title>
+  <title>python分布式进程lambda函数不能被pickled | 逆飞的时光</title>
   
 
 
@@ -183,7 +188,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -271,7 +276,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -330,83 +335,210 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>随笔<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Facewaller">
+      <meta itemprop="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逆飞的时光">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/01/01/2019年了、、、/" itemprop="url">
-              
-                <span itemprop="name">2019年了、、、</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">python分布式进程lambda函数不能被pickled
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-01T22:23:11+08:00" content="2019-01-01">
-          01-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time itemprop="dateCreated datePublished" datetime="2019-07-10T22:40:23+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time itemprop="dateModified" datetime="2019-07-10T23:15:38+08:00">2019-07-10</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在学习<a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017631559645600" target="_blank" rel="noopener">廖雪峰的分布式进程</a>一节时, 在windowns下运行<code>task_master.py</code>文件出现<code>PermissionError: [WinError 5] 拒绝访问</code>错误. 经查询总结如下:</p>
+<p>1) linux下创建进程使用fork(), windows平台下创建进程使用CreateProccess().</p>
+<p>2) fork()调用之后, 没有写操作之前, 与父进程共享一份内存, 并没有真正拥有所谓多进程的”私有内存”. 而CreateProccess()每次执行之后, 都确保子进程拥有新的内存空间.</p>
+<p>3) 这样设计的原因可以从linux和windows多进程的应用场景的差别来理解. fork诞生于无线程时代, 因此fork()之后不exec的话, 作用与多线程非常相似, 可以理解为没有线程概念下的一种解决方案. 而CreateProccess则更像创建兄弟进程, 创建的进程都保证独立存在.</p>
+<p>4) 这种差别直接体现在multiprocessing模块当中, 在不同平台下使用不同的方法创建例子中的manager进程. 在windows下通过将父进程的环境进行序列化存储之后, 再传入createProccess当中.</p>
+<p>5) 问题在于pickling序列化中对匿名函数的不支持, 导致创建进程失败.因此把匿名函数用函数替代即可解决.</p>
+<a id="more"></a>
+<p>改动点有两个:</p>
+<ol>
+<li>取消匿名函数</li>
+<li>加入<code>if __name__ == &#39;__main__&#39;</code>判断.<br>第二点是windows平台对于python多进程实现的要求.主要为了防止循环import</li>
+</ol>
+<p><code>task_worker.py</code>无需更改, 运行效果如下:</p>
+<p><img src="/2019/07/10/python分布式进程lambda函数不能被pickled/task_master.png" alt="task_master"></p>
+<p><img src="/2019/07/10/python分布式进程lambda函数不能被pickled/task_worker.png" alt="task_worker"></p>
+<p>程序运行成功, 一个简单的windowns下的分布式计算就实现了.</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多进程/" rel="tag"># 多进程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/09/使用python发送qq邮件/" rel="next" title="使用python发送qq邮件">
+                <i class="fa fa-chevron-left"></i> 使用python发送qq邮件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -698,6 +830,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
 
   
 
