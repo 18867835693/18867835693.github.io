@@ -116,13 +116,13 @@
 <meta property="og:site_name" content="逆飞的时光">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在学习廖雪峰的分布式进程一节时, 在windowns下运行task_master.py文件出现PermissionError: [WinError 5] 拒绝访问错误. 经查询总结如下: 1) linux下创建进程使用fork(), windows平台下创建进程使用CreateProccess(). 2) fork">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_master.png">
-<meta property="og:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_worker.png">
-<meta property="og:updated_time" content="2019-07-10T15:15:38.330Z">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_master2.png">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_worker2.png">
+<meta property="og:updated_time" content="2019-07-10T15:20:22.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python分布式进程lambda函数不能被pickled">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在学习廖雪峰的分布式进程一节时, 在windowns下运行task_master.py文件出现PermissionError: [WinError 5] 拒绝访问错误. 经查询总结如下: 1) linux下创建进程使用fork(), windows平台下创建进程使用CreateProccess(). 2) fork">
-<meta name="twitter:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_master.png">
+<meta name="twitter:image" content="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/task_master2.png">
 
 
 
@@ -414,7 +414,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time itemprop="dateModified" datetime="2019-07-10T23:15:38+08:00">2019-07-10</time>
+                <time itemprop="dateModified" datetime="2019-07-10T23:20:22+08:00">2019-07-10</time>
               
             
           </span>
@@ -467,8 +467,8 @@
 <li>加入<code>if __name__ == &#39;__main__&#39;</code>判断.<br>第二点是windows平台对于python多进程实现的要求.主要为了防止循环import</li>
 </ol>
 <p><code>task_worker.py</code>无需更改, 运行效果如下:</p>
-<p><img src="/2019/07/10/python分布式进程lambda函数不能被pickled/task_master.png" alt="task_master"></p>
-<p><img src="/2019/07/10/python分布式进程lambda函数不能被pickled/task_worker.png" alt="task_worker"></p>
+<p><img src="/2019/07/10/python分布式进程lambda函数不能被pickled/task_master2.png" alt="task_master"></p>
+<p><img src="/2019/07/10/python分布式进程lambda函数不能被pickled/task_worker2.png" alt="task_worker"></p>
 <p>程序运行成功, 一个简单的windowns下的分布式计算就实现了.</p>
 
       
