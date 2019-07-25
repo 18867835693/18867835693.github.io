@@ -351,6 +351,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Facewaller">
+      <meta itemprop="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逆飞的时光">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/23/使用Scrapy开发Python爬虫/" class="post-title-link" itemprop="https://18867835693.github.io/index.html">使用Scrapy开发Python爬虫</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time itemprop="dateCreated datePublished" datetime="2019-07-23T21:04:12+08:00">2019-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time itemprop="dateModified" datetime="2019-07-26T00:24:31+08:00">2019-07-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/几个小项目实践/" itemprop="url" rel="index"><span itemprop="name">几个小项目实践</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h4><p>本文将以爬取时光网<code>http://www.mtime.com/top/movie/top100/</code>作为用例讲解.</p>
+<p>注意: 应先安装Scrapy模块.</p>
+<p>在命令行中输入<code>scrapy shell http://www.mtime.com/top/movie/top100/</code>启动Scrapy shell调试终端.</p>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/1.png" alt="Scrapy shell调试"></p>
+<p>response响应200证明请求成功, 说明时光网是欢迎爬虫的, 并不需要我们伪装成浏览器. 右键检查网页元素, 我们发现电影信息都在一个<code>&lt;ul&gt;</code>列表中.</p>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/2.png" alt="电影信息节点集"></p>
+<p>下面就可以使用xpath语法抓取我们想要的信息了, 在代码开发之前, 可以先在Scrapy shell调试台匹配相关信息, 输入以下代码:<br><code>response.xpath(&#39;//ul[@id=&quot;asyncRatingRegion&quot;]/li/div[@class=&quot;mov_con&quot;]/h2/a/text()&#39;).get()</code></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/23/使用Scrapy开发Python爬虫/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/07/10/python分布式进程lambda函数不能被pickled/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1960,186 +2144,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2018/12/12/疯狂java讲义之实现控制台打印五子棋游戏/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Facewaller">
-      <meta itemprop="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="逆飞的时光">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/12/疯狂java讲义之实现控制台打印五子棋游戏/" class="post-title-link" itemprop="https://18867835693.github.io/index.html">疯狂java讲义之实现控制台打印五子棋游戏</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time itemprop="dateCreated datePublished" datetime="2018-12-12T17:23:58+08:00">2018-12-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time itemprop="dateModified" datetime="2019-02-03T22:43:19+08:00">2019-02-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/几个小项目实践/" itemprop="url" rel="index"><span itemprop="name">几个小项目实践</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>基于数组和循环在控制台实现简单的五子棋游戏，运行效果如图</p>
-<p><img src="/2018/12/12/疯狂java讲义之实现控制台打印五子棋游戏/2.PNG" alt="运行效果"></p>
-<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/12/12/疯狂java讲义之实现控制台打印五子棋游戏/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2189,7 +2193,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2247,7 +2251,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

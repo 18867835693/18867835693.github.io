@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32_32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16_16.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一、准备工作本文将以爬取时光网http://www.mtime.com/top/movie/top100/作为用例讲解. 注意: 应先安装Scrapy模块. 在命令行中输入scrapy shell http://www.mtime.com/top/movie/top100/启动Scrapy shell调试终端.  response响应200证明请求成功, 说明时光网是欢迎爬虫的, 并不需要我们伪装">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Scrapy开发Python爬虫">
+<meta property="og:url" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/index.html">
+<meta property="og:site_name" content="逆飞的时光">
+<meta property="og:description" content="一、准备工作本文将以爬取时光网http://www.mtime.com/top/movie/top100/作为用例讲解. 注意: 应先安装Scrapy模块. 在命令行中输入scrapy shell http://www.mtime.com/top/movie/top100/启动Scrapy shell调试终端.  response响应200证明请求成功, 说明时光网是欢迎爬虫的, 并不需要我们伪装">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/1.png">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/2.png">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/3.png">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/4.png">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/5.png">
+<meta property="og:image" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/6.png">
+<meta property="og:updated_time" content="2019-07-25T16:24:31.938Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Scrapy开发Python爬虫">
+<meta name="twitter:description" content="一、准备工作本文将以爬取时光网http://www.mtime.com/top/movie/top100/作为用例讲解. 注意: 应先安装Scrapy模块. 在命令行中输入scrapy shell http://www.mtime.com/top/movie/top100/启动Scrapy shell调试终端.  response响应200证明请求成功, 说明时光网是欢迎爬虫的, 并不需要我们伪装">
+<meta name="twitter:image" content="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>使用Scrapy开发Python爬虫 | 逆飞的时光</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">逆飞的时光</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://18867835693.github.io/2019/07/23/使用Scrapy开发Python爬虫/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Facewaller">
+      <meta itemprop="description" content="“暮色苍茫看劲松，乱云飞渡仍从容”">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逆飞的时光">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用Scrapy开发Python爬虫
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time itemprop="dateCreated datePublished" datetime="2019-07-23T21:04:12+08:00">2019-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time itemprop="dateModified" datetime="2019-07-26T00:24:31+08:00">2019-07-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/几个小项目实践/" itemprop="url" rel="index"><span itemprop="name">几个小项目实践</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h4><p>本文将以爬取时光网<code>http://www.mtime.com/top/movie/top100/</code>作为用例讲解.</p>
+<p>注意: 应先安装Scrapy模块.</p>
+<p>在命令行中输入<code>scrapy shell http://www.mtime.com/top/movie/top100/</code>启动Scrapy shell调试终端.</p>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/1.png" alt="Scrapy shell调试"></p>
+<p>response响应200证明请求成功, 说明时光网是欢迎爬虫的, 并不需要我们伪装成浏览器. 右键检查网页元素, 我们发现电影信息都在一个<code>&lt;ul&gt;</code>列表中.</p>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/2.png" alt="电影信息节点集"></p>
+<p>下面就可以使用xpath语法抓取我们想要的信息了, 在代码开发之前, 可以先在Scrapy shell调试台匹配相关信息, 输入以下代码:<br><code>response.xpath(&#39;//ul[@id=&quot;asyncRatingRegion&quot;]/li/div[@class=&quot;mov_con&quot;]/h2/a/text()&#39;).get()</code></p>
+<a id="more"></a>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/3.png" alt="电影标题"><br>成功得到了电影的标题, 实际上我们可以匹配到所有的<code>&lt;li&gt;</code>标签并将之存放在集合中, 再使用for循环就可以得到每一部电影的相关信息了.</p>
+<p>爬取的另一个关键是得到下一页的请求地址. 仍热是右键检查元素, 我们可以发现, 下一页的地址信息都存放在一个属性id为PageNavigator的<code>&lt;div&gt;</code>中.</p>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/4.png" alt="下一页地址"></p>
+<p>在scrapy shell调试台中尝试获取下一页链接, 输入以下代码:<br><code>response.xpath(&#39;//div[@id=&quot;PageNavigator&quot;]/a[2]/@href&#39;).get()</code></p>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/5.png" alt="Scrapy shell"><br>注意: <code>&lt;a&gt;</code>标签下标是从1开始的</p>
+<h4 id="二、创建爬虫"><a href="#二、创建爬虫" class="headerlink" title="二、创建爬虫"></a>二、创建爬虫</h4><ol>
+<li>在命令行中键入<code>scrapy startproject TopMovie100Spider</code></li>
+<li>cd TopMovie100Spider进入该文件夹, 键入<code>scrapy genspider Top_List mtime.com</code>创建爬虫</li>
+</ol>
+<p>该爬虫项目的目录结构图:</p>
+<p><img src="/2019/07/23/使用Scrapy开发Python爬虫/6.png" alt="爬虫项目目录结构"></p>
+<h5 id="items-py代码"><a href="#items-py代码" class="headerlink" title="items.py代码"></a>items.py代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topmovie100SpiderItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 介绍电影页面的url</span></span><br><span class="line">    url = scrapy.Field()</span><br><span class="line">    <span class="comment"># 图片url</span></span><br><span class="line">    img_url = scrapy.Field()</span><br><span class="line">    <span class="comment"># 电影标题</span></span><br><span class="line">    title = scrapy.Field()</span><br><span class="line">    <span class="comment"># 导演</span></span><br><span class="line">    directors = scrapy.Field()</span><br><span class="line">    <span class="comment"># 主演</span></span><br><span class="line">    actors = scrapy.Field()</span><br><span class="line">    <span class="comment"># 类型</span></span><br><span class="line">    movie_type = scrapy.Field()</span><br><span class="line">    <span class="comment"># 电影简介</span></span><br><span class="line">    description = scrapy.Field()</span><br><span class="line">    <span class="comment"># 得分</span></span><br><span class="line">    mark = scrapy.Field()</span><br><span class="line">    <span class="comment"># 评分人数</span></span><br><span class="line">    mark_info = scrapy.Field()</span><br></pre></td></tr></table></figure>
+<h5 id="Top-List-py代码"><a href="#Top-List-py代码" class="headerlink" title="Top_List.py代码"></a>Top_List.py代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> TopMovie100Spider.items <span class="keyword">import</span> Topmovie100SpiderItem</span><br><span class="line"></span><br><span class="line">page_no = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TopListSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'Top_List'</span></span><br><span class="line">    allowed_domains = [<span class="string">'www.mtime.com'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://www.mtime.com/top/movie/top100/'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        <span class="keyword">global</span> page_no</span><br><span class="line">        <span class="comment"># 爬取所有电影的信息</span></span><br><span class="line">        movie_list = response.xpath(<span class="string">'//ul[@id="asyncRatingRegion"]/li'</span>)</span><br><span class="line">        <span class="keyword">for</span> movie_li <span class="keyword">in</span> movie_list:</span><br><span class="line">            item = Topmovie100SpiderItem()</span><br><span class="line">            <span class="comment"># 介绍电影页面的url</span></span><br><span class="line">            item[<span class="string">'url'</span>] = movie_li.xpath(<span class="string">'div[@class="mov_pic"]/a/@href'</span>).get()</span><br><span class="line">            <span class="comment"># 图片url</span></span><br><span class="line">            item[<span class="string">'img_url'</span>] = movie_li.xpath(<span class="string">'div[@class="mov_pic"]/a/img/@src'</span>).get()</span><br><span class="line">            <span class="comment"># 电影标题</span></span><br><span class="line">            item[<span class="string">'title'</span>] = movie_li.xpath(<span class="string">'div[@class="mov_con"]/h2/a/text()'</span>).get()</span><br><span class="line">            <span class="comment"># 导演</span></span><br><span class="line">            item[<span class="string">'directors'</span>] = <span class="string">'/'</span>.join(movie_li.xpath(<span class="string">'div[@class="mov_con"]/p'</span>)[<span class="number">0</span>].xpath(<span class="string">'a/text()'</span>).getall())</span><br><span class="line">            <span class="keyword">if</span> len(movie_li.xpath(<span class="string">'div[@class="mov_con"]/p'</span>)) == <span class="number">4</span>:</span><br><span class="line">                <span class="comment"># 主演</span></span><br><span class="line">                item[<span class="string">'actors'</span>] = <span class="string">'/'</span>.join(movie_li.xpath(<span class="string">'div[@class="mov_con"]/p'</span>)[<span class="number">1</span>].xpath(<span class="string">'a/text()'</span>).getall())</span><br><span class="line">                <span class="comment"># 电影类型</span></span><br><span class="line">                item[<span class="string">'movie_type'</span>] = <span class="string">'/'</span>.join(movie_li.xpath(<span class="string">'div[@class="mov_con"]/p'</span>)[<span class="number">2</span>].xpath(<span class="string">'span/a/text()'</span>).getall())</span><br><span class="line">                <span class="comment"># 电影简介</span></span><br><span class="line">                item[<span class="string">'description'</span>] = movie_li.xpath(<span class="string">'div[@class="mov_con"]/p'</span>)[<span class="number">3</span>].xpath(<span class="string">'text()'</span>).get()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 主演</span></span><br><span class="line">                item[<span class="string">'actors'</span>] = <span class="string">''</span></span><br><span class="line">                <span class="comment"># 电影类型</span></span><br><span class="line">                item[<span class="string">'movie_type'</span>] = <span class="string">'/'</span>.join(movie_li.xpath(<span class="string">'div[@class="mov_con"]/p'</span>)[<span class="number">1</span>].xpath(<span class="string">'span/a/text()'</span>).getall())</span><br><span class="line">                <span class="comment"># 电影简介</span></span><br><span class="line">                item[<span class="string">'description'</span>] = movie_li.xpath(<span class="string">'div[@class="mov_con"]/p'</span>)[<span class="number">2</span>].xpath(<span class="string">'text()'</span>).get()</span><br><span class="line">            <span class="comment"># 得分</span></span><br><span class="line">            item[<span class="string">'mark'</span>] = <span class="string">''</span>.join(movie_li.xpath(<span class="string">'div[@class="mov_point"]/b/span/text()'</span>).getall())</span><br><span class="line">            <span class="comment"># 评分人数</span></span><br><span class="line">            item[<span class="string">'mark_info'</span>] = movie_li.xpath(<span class="string">'div[@class="mov_point"]/p/text()'</span>).get().strip()</span><br><span class="line">            <span class="keyword">yield</span> item</span><br><span class="line"></span><br><span class="line">        page_no += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> page_no &lt;= <span class="number">9</span>:</span><br><span class="line">            <span class="comment"># 获取下一页的链接</span></span><br><span class="line">            new_link = response.xpath(<span class="string">'//div[@id="PageNavigator"]/a'</span>)[page_no].xpath(<span class="string">'@href'</span>).get()</span><br><span class="line">            <span class="comment"># 再次请求下一个页面</span></span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(new_link, callback=self.parse)</span><br></pre></td></tr></table></figure>
+<h5 id="pipelines-py代码"><a href="#pipelines-py代码" class="headerlink" title="pipelines.py代码"></a>pipelines.py代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topmovie100SpiderPipeline</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># # 将数据写入json</span></span><br><span class="line">    <span class="comment"># # 定义构造器，初始化要写入的文件</span></span><br><span class="line">    <span class="comment"># def __init__(self):</span></span><br><span class="line">    <span class="comment">#     self.json_file = open("topMovie_list.json", "wb+")</span></span><br><span class="line">    <span class="comment">#     self.json_file.write('[\n'.encode("utf-8"))</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># # 重写close_spider回调方法，用于关闭文件</span></span><br><span class="line">    <span class="comment"># def close_spider(self, spider):</span></span><br><span class="line">    <span class="comment">#     print('----------关闭文件-----------')</span></span><br><span class="line">    <span class="comment">#     # 后退2个字符，也就是去掉最后一条记录之后的换行符和逗号</span></span><br><span class="line">    <span class="comment">#     self.json_file.seek(-2, 1)</span></span><br><span class="line">    <span class="comment">#     self.json_file.write('\n]'.encode("utf-8"))</span></span><br><span class="line">    <span class="comment">#     self.json_file.close()</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># def process_item(self, item, spider):</span></span><br><span class="line">    <span class="comment">#     # 将item转换成JSON字符串</span></span><br><span class="line">    <span class="comment">#     text = json.dumps(dict(item), ensure_ascii=False) + ",\n"</span></span><br><span class="line">    <span class="comment">#     # 写入JSON字符串</span></span><br><span class="line">    <span class="comment">#     self.json_file.write(text.encode("utf-8"))</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将数据写去数据库</span></span><br><span class="line">    <span class="comment"># 定义构造器, 初始化要写入的文件</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.conn = mysql.connector.connect(user=<span class="string">'root'</span>, password=<span class="string">'****'</span>, host=<span class="string">'localhost'</span>, port=<span class="string">'3306'</span>,</span><br><span class="line">                                            database=<span class="string">'test'</span>, use_unicode=<span class="keyword">True</span>)</span><br><span class="line">        self.cur = self.conn.cursor()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 重写close_spider回调方法, 用于关闭数据库资源</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span></span><br><span class="line">        print(<span class="string">'--------------关闭数据库资源--------------'</span>)</span><br><span class="line">        <span class="comment"># 关闭游标</span></span><br><span class="line">        self.cur.close()</span><br><span class="line">        <span class="comment"># 关闭连接</span></span><br><span class="line">        self.conn.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        <span class="comment"># 在此之前你需要先在数据库中建表</span></span><br><span class="line">        self.cur.execute(<span class="string">"INSERT INTO top_movie VALUES(null, %s, %s, %s, %s, %s, %s, %s, %s, %s)"</span>, (</span><br><span class="line">            item[<span class="string">'url'</span>], item[<span class="string">'img_url'</span>], item[<span class="string">'title'</span>], item[<span class="string">'directors'</span>], item[<span class="string">'actors'</span>], item[<span class="string">'movie_type'</span>],</span><br><span class="line">            item[<span class="string">'description'</span>], item[<span class="string">'mark'</span>], item[<span class="string">'mark_info'</span>]))</span><br><span class="line">        self.conn.commit()</span><br></pre></td></tr></table></figure>
+<h5 id="setting-py代码"><a href="#setting-py代码" class="headerlink" title="setting.py代码"></a>setting.py代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOT_NAME = <span class="string">'TopMovie100Spider'</span></span><br><span class="line">SPIDER_MODULES = [<span class="string">'TopMovie100Spider.spiders'</span>]</span><br><span class="line">NEWSPIDER_MODULE = <span class="string">'TopMovie100Spider.spiders'</span></span><br><span class="line">ROBOTSTXT_OBEY = <span class="keyword">True</span></span><br><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   <span class="string">'TopMovie100Spider.pipelines.Topmovie100SpiderPipeline'</span>: <span class="number">300</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/10/python分布式进程lambda函数不能被pickled/" rel="next" title="python分布式进程lambda函数不能被pickled">
+                <i class="fa fa-chevron-left"></i> python分布式进程lambda函数不能被pickled
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Facewaller">
+            
+              <p class="site-author-name" itemprop="name">Facewaller</p>
+              <p class="site-description motion-element" itemprop="description">“暮色苍茫看劲松，乱云飞渡仍从容”</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/5710147235/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="Weibo &rarr; https://weibo.com/5710147235/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、准备工作"><span class="nav-text">一、准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、创建爬虫"><span class="nav-text">二、创建爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#items-py代码"><span class="nav-text">items.py代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Top-List-py代码"><span class="nav-text">Top_List.py代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pipelines-py代码"><span class="nav-text">pipelines.py代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#setting-py代码"><span class="nav-text">setting.py代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Facewaller</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
